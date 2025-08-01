@@ -1,0 +1,58 @@
+{
+  "categories": {
+    "teknologi": [
+      {
+        "id": 1,
+        "title": "Perkembangan AI di Indonesia",
+        "author": "John Doe",
+        "date": "2024-01-15",
+        "content": "Artificial Intelligence semakin berkembang pesat di Indonesia...",
+        "tags": ["AI", "teknologi", "indonesia"],
+        "image": "ai-indonesia.jpg"
+      },
+      {
+        "id": 2,
+        "title": "Framework Laravel Terbaru",
+        "author": "Jane Smith",
+        "date": "2024-01-10",
+        "content": "Laravel 11 membawa berbagai fitur baru yang menarik...",
+        "tags": ["laravel", "php", "framework"],
+        "image": "laravel-update.jpg"
+      }
+    ],
+    "bisnis": [
+      {
+        "id": 3,
+        "title": "Strategi Marketing Digital 2024",
+        "author": "Ahmad Budi",
+        "date": "2024-01-12",
+        "content": "Tren marketing digital yang perlu diperhatikan tahun ini...",
+        "tags": ["marketing", "digital", "strategi"],
+        "image": "digital-marketing.jpg"
+      },
+      {
+        "id": 4,
+        "title": "E-commerce di Era Modern",
+        "author": "Siti Aisyah",
+        "date": "2024-01-08",
+        "content": "Perkembangan e-commerce yang semakin pesat...",
+        "tags": ["ecommerce", "bisnis", "online"],
+        "image": "ecommerce-trend.jpg"
+      }
+    ],
+    "kesehatan": [
+      {
+        "id": 5,
+        "title": "Tips Hidup Sehat di Era Digital",
+        "author": "Dr. Rahman",
+        "date": "2024-01-14",
+        "content": "Cara menjaga kesehatan di tengah aktivitas digital yang padat...",
+        "tags": ["kesehatan", "digital", "lifestyle"],
+        "image": "healthy-lifestyle.jpg"
+      }
+    ]
+  },
+  "featured": [1, 3, 5],
+  "totalArticles": 5,
+  "lastUpdated": "2024-01-15T10:00:00Z"
+}
