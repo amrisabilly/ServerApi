@@ -115,8 +115,7 @@
                             d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987s11.987-5.367 11.987-11.987C24.004 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.349-1.051-2.349-2.348s1.051-2.349 2.349-2.349 2.348 1.052 2.348 2.349-1.051 2.348-2.348 2.348zm7.718 0c-1.297 0-2.349-1.051-2.349-2.348s1.052-2.349 2.349-2.349c1.296 0 2.348 1.052 2.348 2.349s-1.052 2.348-2.348 2.348z" />
                     </svg>
                 </a>
-                <a href="https://wa.me/?text={{ urlencode($article['title'] . ' - ' . request()->fullUrl()) }}"
-                    target="_blank"
+                <a href="https://wa.me/?text={{ urlencode(request()->fullUrl()) }}" target="_blank"
                     class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition duration-200">
                     <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                         <path
