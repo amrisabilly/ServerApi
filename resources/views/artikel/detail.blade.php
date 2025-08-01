@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $article['title'] }} - Portal Artikel</title>
     @vite('resources/css/app.css')
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{{ $article['title'] }}">
+    <meta property="og:description" content="{{ Str::limit($article['content'], 100) }}">
+    <meta property="og:image" content="{{ asset('images/' . $article['image']) }}">
+    <meta property="og:url" content="{{ request()->fullUrl() }}">
 </head>
 
 <body class="bg-gray-100">
@@ -29,7 +35,7 @@
     <main class="container mx-auto px-4 py-8">
         <div class="max-w-4xl mx-auto">
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="/images/{{ $article['image'] }}" alt="{{ $article['title'] }}"
+                <img src="/artikel/{{ $article['image'] }}" alt="{{ $article['title'] }}"
                     class="w-full h-64 object-cover bg-gray-200">
 
                 <div class="p-8">

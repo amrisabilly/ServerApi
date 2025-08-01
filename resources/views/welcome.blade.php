@@ -28,7 +28,7 @@
                             <a href="{{ route('artikel.detail', $article['id']) }}"
                                 class="block transform hover:scale-105 transition duration-300">
                                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                                    <img src="/images/{{ $article['image'] }}" alt="{{ $article['title'] }}"
+                                    <img src="/artikel/{{ $article['image'] }}" alt="{{ $article['title'] }}"
                                         class="w-full h-48 object-cover 
                                          @if ($categoryName == 'teknologi') bg-blue-200 
                                          @elseif($categoryName == 'bisnis') bg-green-200 
