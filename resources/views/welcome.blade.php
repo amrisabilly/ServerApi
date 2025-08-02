@@ -58,7 +58,7 @@
         </div>
     </section>
 
-    <!-- Categories -->
+    {{-- <!-- Categories -->
     <section class="container mx-auto px-4 py-8">
         @foreach ($data['categories'] as $categoryName => $articles)
             <div class="mb-12">
@@ -97,21 +97,21 @@
         @endforeach
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-12">
+    <!-- Footer --> --}}
+    {{-- <footer class="bg-gray-800 text-white py-8 mt-12">
         <div class="container mx-auto px-4 text-center">
             <p>&copy; 2024 Portal Artikel. Total artikel: {{ $data['totalArticles'] }} | Terakhir diperbarui:
                 {{ date('d M Y', strtotime($data['lastUpdated'])) }}</p>
         </div>
-    </footer>
+    </footer> --}}
 </body>
 
 </html>
-<footer class="bg-gray-800 text-white py-8 mt-12">
+{{-- <footer class="bg-gray-800 text-white py-8 mt-12">
     <div class="container mx-auto px-4 text-center">
         <p>&copy; 2024 Portal Artikel. Total artikel: 5 | Terakhir diperbarui: 15 Jan 2024</p>
     </div>
-</footer>
+</footer> --}}
 </body>
 
 </html>
