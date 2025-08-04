@@ -14,7 +14,8 @@
     <!-- Open Graph Meta Tags untuk Facebook & LinkedIn -->
     <meta property="og:title" content="{{ $article['title'] }}">
     <meta property="og:description" content="{{ Str::limit(strip_tags($article['content']), 160) }}">
-    <meta property="og:image" content="{{ asset('artikel/' . $article['image']) }}">
+    <meta property="og:image" content="{{ url('artikel/' . $article['image']) }}">
+    <meta property="og:image:secure_url" content="{{ url('artikel/' . $article['image']) }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:type" content="image/jpeg">

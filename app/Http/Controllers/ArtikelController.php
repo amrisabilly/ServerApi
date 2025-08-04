@@ -28,9 +28,9 @@ class ArtikelController extends Controller
             abort(404);
         }
 
-        // Generate SEO-friendly URL
+        // Generate SEO-friendly URL dengan URL absolut
         $currentUrl = route('artikel.show', ['slug' => $slug]);
-        $imageUrl = asset('artikel/' . $article['image']);
+        $imageUrl = url('artikel/' . $article['image']); // Gunakan url() bukan asset()
         $title = $article['title'];
         $description = Str::limit(strip_tags($article['content']), 100);
 
