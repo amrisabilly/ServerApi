@@ -57,38 +57,6 @@
             @endforeach
         </div>
     </section>
-
-    <!-- Categories -->
-    <section class="container mx-auto px-4 py-8">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach ($data['categories'] as $category => $articles)
-                @foreach ($articles as $article)
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src="/artikel/{{ $article['image'] }}" alt="{{ $article['title'] }}"
-                            class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h2 class="text-xl font-bold mb-2">{{ $article['title'] }}</h2>
-                            <p class="text-gray-600 mb-4">{{ Str::limit($article['content'], 100) }}</p>
-                            <div class="flex justify-between items-center mb-4">
-                                <span class="text-sm text-gray-500">{{ $article['author'] }}</span>
-                                <span class="text-sm text-gray-500">{{ date('d M Y', strtotime($article['date'])) }}</span>
-                            </div>
-                            <a href="{{ route('artikel.show', ['slug' => Str::slug($article['title'])]) }}"
-                                class="text-blue-600 hover:text-blue-800 font-medium">Baca Selengkapnya →</a>
-                        </div>
-                    </div>
-                @endforeach
-            @endforeach
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-12">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 Portal Artikel. Total artikel: {{ $data['totalArticles'] ?? count(collect($data['categories'])->flatten(1)) }} | Terakhir diperbarui:
-                {{ date('d M Y') }}</p>
-        </div>
-    </footer>
-</body>
+    </body>
 
 </html>
