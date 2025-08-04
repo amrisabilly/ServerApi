@@ -8,22 +8,33 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ route('artikel.show', ['slug' => Str::slug($article['title'])]) }}">
+
     <!-- Open Graph Meta Tags untuk Facebook & LinkedIn -->
     <meta property="og:title" content="{{ $article['title'] }}">
-    <meta property="og:description" content="{{ Str::limit($article['content'], 160) }}">
+    <meta property="og:description" content="{{ Str::limit(strip_tags($article['content']), 160) }}">
     <meta property="og:image" content="{{ asset('artikel/' . $article['image']) }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:url" content="{{ request()->fullUrl() }}">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:url" content="{{ route('artikel.show', ['slug' => Str::slug($article['title'])]) }}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Portal Artikel">
+    <meta property="article:author" content="{{ $article['author'] }}">
+    <meta property="article:published_time" content="{{ $article['date'] }}">
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $article['title'] }}">
-    <meta name="twitter:description" content="{{ Str::limit($article['content'], 160) }}">
+    <meta name="twitter:description" content="{{ Str::limit(strip_tags($article['content']), 160) }}">
     <meta name="twitter:image" content="{{ asset('artikel/' . $article['image']) }}">
-    <meta name="twitter:url" content="{{ request()->fullUrl() }}">
+    <meta name="twitter:url" content="{{ route('artikel.show', ['slug' => Str::slug($article['title'])]) }}">
+    <meta name="twitter:creator" content="@portalArtikel">
+
+    <!-- Additional Meta Tags -->
+    <meta name="description" content="{{ Str::limit(strip_tags($article['content']), 160) }}">
+    <meta name="keywords" content="{{ implode(', ', $article['tags']) }}">
 
     <style>
         /* Custom styles for Laravel Share buttons */
@@ -208,7 +219,8 @@
                                 d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                         </svg>
                     </div>
-                    <input type="text" id="linkInput" value="{{ request()->fullUrl() }}"
+                    <input type="text" id="linkInput"
+                        value="{{ route('artikel.show', ['slug' => Str::slug($article['title'])]) }}"
                         class="flex-1 bg-transparent px-2 py-2 text-sm text-gray-700 outline-none" readonly>
                     <button id="copyBtn"
                         class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-r-lg text-sm font-medium transition duration-200">

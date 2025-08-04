@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -16,19 +17,22 @@ class ArtikelController extends Controller
         return view('welcome', compact('data'));
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $article = $this->getArticleById($id);
+        // Convert slug back to title for search
+        $article = collect($this->getArticles())->first(function ($article) use ($slug) {
+            return Str::slug($article['title']) === $slug;
+        });
 
         if (!$article) {
             abort(404);
         }
 
-        // Custom share URLs dengan gambar dan judul
-        $currentUrl = request()->fullUrl();
+        // Generate SEO-friendly URL
+        $currentUrl = route('artikel.show', ['slug' => $slug]);
         $imageUrl = asset('artikel/' . $article['image']);
         $title = $article['title'];
-        $description = Str::limit($article['content'], 100);
+        $description = Str::limit(strip_tags($article['content']), 100);
 
         $shareButtons = [
             'facebook' => "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($currentUrl) . "&t=" . urlencode($title),
@@ -39,6 +43,22 @@ class ArtikelController extends Controller
         ];
 
         return view('artikel.detail', compact('article', 'shareButtons'));
+    }
+
+    private function getArticles()
+    {
+        $jsonPath = public_path('artikel/dataArtikel.json');
+        $data = json_decode(file_get_contents($jsonPath), true);
+
+        $articles = [];
+        foreach ($data['categories'] as $category => $categoryArticles) {
+            foreach ($categoryArticles as $article) {
+                $article['category'] = $category;
+                $articles[] = $article;
+            }
+        }
+
+        return $articles;
     }
 
     private function getArticleById($id)
