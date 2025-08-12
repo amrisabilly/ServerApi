@@ -3,14 +3,14 @@
 @section('style')
     <style>
         /* h1 {
-                    color: red;
-                } */
+                        color: red;
+                    } */
     </style>
 @endsection
 
 @section('content')
     <h1 class="text-3xl font-semibold">
-        Home
+        Home Page
     </h1>
 @endsection
 
