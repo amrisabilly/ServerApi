@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\landing\BerandaController;
 
-Route::get('/', [ArtikelController::class, 'index']);
-Route::get('/artikel/{slug}', [ArtikelController::class, 'show'])->name('artikel.show');
+Route::get('/', function () {
+    return view('landing.home.index');
+})->name('index');
+
+Route::get('/about', function () {
+    return view('landing.about.index');
+})->name('about');
