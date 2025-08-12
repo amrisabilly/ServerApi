@@ -18,9 +18,9 @@
 @endsection
 
 @section('script')
-    {{-- <script>
+    <script>
         function tampilkanPesan() {
             alert("hello bro");
         }
-    </script> --}}
+    </script>
 @endsection
