@@ -3,8 +3,8 @@
 @section('style')
     <style>
         /* h1 {
-                        color: red;
-                    } */
+                                color: red;
+                            } */
     </style>
 @endsection
 
@@ -15,9 +15,9 @@
 @endsection
 
 @section('script')
-    {{-- <script>
+    <script>
         function tampilkanPesan() {
             alert("hello bro");
         }
-    </script> --}}
+    </script>
 @endsection

@@ -5,6 +5,8 @@
         </li>
         <li><a href="{{ route('about') }}"
                 class="{{ Request::is('about') ? 'border-b-2 border-cyan-500' : '' }}">about</a></li>
+        <li><a href="{{ route('article') }}"
+                class="{{ Request::is('article') ? 'border-b-2 border-cyan-500' : '' }}">article</a></li>
     </ul>
     <h1>Login</h1>
 </nav>
