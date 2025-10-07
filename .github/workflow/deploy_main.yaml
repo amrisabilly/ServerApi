@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Pull latest code di server via SSH
       - name: Pull latest code on server
-        # This step updates your backend code (PHP files, etc.) on the server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -21,13 +21,18 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            set -e
             cd /home/${{ secrets.SSH_USERNAME }}/monitoringweb.decoratics.id
             git pull origin main
-            # Optional: Add other server commands here like composer install or artisan migrate
-            # php artisan migrate --force
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            php artisan migrate --force
+            php artisan config:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
 
-      - name: Checkout repository (Laravel + Tailwind optimized)
-        # This step checks out the code on the GitHub Actions runner to build frontend assets
+      # 2️⃣ Checkout repository di GitHub runner untuk build frontend
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           sparse-checkout: |
@@ -49,11 +54,13 @@ jobs:
             artisan
           sparse-checkout-cone-mode: false
 
+      # 3️⃣ Setup Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
+      # 4️⃣ Cache Node modules
       - name: Cache Node.js modules
         id: cache-npm
         uses: actions/cache@v4
@@ -63,25 +70,21 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
+      # 5️⃣ Install dependencies & build Tailwind/Vite
       - name: Install Node dependencies
         run: npm ci
 
       - name: Build Tailwind / Vite
         run: npm run build
 
+      # 6️⃣ Upload build assets ke server
       - name: Upload built assets to server
-        # This step securely copies the built assets to the correct server directory
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          # FIX: Changed "public/build/*" to "public/build/"
-          # A trailing slash tells SCP to copy the CONTENTS of the directory.
-          # This prevents creating a nested public/build/public/build structure.
+          port: ${{ secrets.SSH_PORT }}
           source: "public/build/"
           target: "/home/${{ secrets.SSH_USERNAME }}/monitoringweb.decoratics.id/"
-
-          
