@@ -16,7 +16,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Deskripsi produk ke-' . $i,
                 'origin_story' => 'Asal usul produk ke-' . $i,
                 'price' => rand(50000, 150000),
-                'image_url' => 'https://example.com/robusta-lampung.jpg',
+                'image_url' => 'https://tse4.mm.bing.net/th/id/OIP.nyCUkf0GY8ueelkMm_deIQHaHD?pid=Api&P=0&h=180',
             ]);
         }
     }
