@@ -39,9 +39,12 @@ class AuthentikasiController extends Controller
             return response()->json(['message' => 'Login gagal'], 401);
         }
 
+        $token = auth('api')->login($user);
+
         return response()->json([
             'message' => 'Login berhasil',
             'user' => $user,
+            'token' => $token,
         ]);
     }
 
