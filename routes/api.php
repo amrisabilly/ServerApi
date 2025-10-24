@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\PersonController;
 use App\Http\Controllers\Api\AplikasiCoffe\AuthentikasiController;
 use App\Http\Controllers\Api\AplikasiCoffe\CategoriesController;
 use App\Http\Controllers\Api\AplikasiCoffe\ProductController;
-
+use App\Http\Controllers\Api\MbahOerip\MenuController;
 
 // Route API
 Route::resource('/person', PersonController::class);
@@ -21,4 +21,8 @@ Route::prefix('auth')->group(function () {
 Route::prefix('coffe')->group(function () {
     Route::apiResource('categories', CategoriesController::class);
     Route::apiResource('products', ProductController::class);
+});
+
+Route::prefix('mbah-oerip')->group(function () {
+    Route::get('/menu', [MenuController::class, 'index']);
 });

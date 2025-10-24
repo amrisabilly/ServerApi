@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models\MbahOerip;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Category extends Model
+{
+    use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+    ];
+
+    public function menuItems(){
+        return $this->hasMany(MenuItem::class);
+    }
+}

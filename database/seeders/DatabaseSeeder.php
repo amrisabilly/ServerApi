@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\AplikasiCoffe\UserSeeder;
 use Database\Seeders\AplikasiCoffe\CategoriesSeeder;
 use Database\Seeders\AplikasiCoffe\ProductSeeder;
+use Database\Seeders\MbahOerip\CategorySeeder;
+use Database\Seeders\MbahOerip\MenuItemSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +20,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategoriesSeeder::class,
             ProductSeeder::class,
+        ]);
+        $this->call([
+            CategorySeeder::class,
+            MenuItemSeeder::class,
         ]);
     }
 }
