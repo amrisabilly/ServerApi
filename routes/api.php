@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\PersonController;
 use App\Http\Controllers\Api\AplikasiCoffe\AuthentikasiController;
 use App\Http\Controllers\Api\AplikasiCoffe\CategoriesController;
 use App\Http\Controllers\Api\AplikasiCoffe\ProductController;
+use App\Http\Controllers\Api\MbahOerip\CategoryController;
+use App\Http\Controllers\Api\MbahOerip\HomeController;
 use App\Http\Controllers\Api\MbahOerip\MenuController;
 
 // Route API
@@ -24,5 +26,25 @@ Route::prefix('coffe')->group(function () {
 });
 
 Route::prefix('mbah-oerip')->group(function () {
-    Route::get('/menu', [MenuController::class, 'index']);
+
+    // mendaftarkan 5 rute CRUD untuk Kategori:
+    // GET    /api/mbah-oerip/categories        -> CategoryController@index
+    // POST   /api/mbah-oerip/categories        -> CategoryController@store
+    // GET    /api/mbah-oerip/categories/{id}   -> CategoryController@show
+    // PUT    /api/mbah-oerip/categories/{id}   -> CategoryController@update
+    // DELETE /api/mbah-oerip/categories/{id}   -> CategoryController@destroy
+    Route::apiResource('categories', CategoryController::class);
+
+    // mendaftarkan 5 rute CRUD untuk Menu:
+    // GET    /api/mbah-oerip/menu              -> MenuController@index
+    // POST   /api/mbah-oerip/menu              -> MenuController@store
+    // GET    /api/mbah-oerip/menu/{id}         -> MenuController@show
+    // PUT    /api/mbah-oerip/menu/{id}         -> MenuController@update
+    // DELETE /api/mbah-oerip/menu/{id}         -> MenuController@destroy
+    Route::apiResource('menu', MenuController::class);
+    // Route::get('/best-sellers', [HomeController::class, 'getBestSellers']);
+});
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
 });
