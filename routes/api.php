@@ -19,7 +19,7 @@ Route::resource('/person', PersonController::class);
 
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthentikasiController::class, 'register']);
-    Route::put('/profile/update', [AuthentikasiController::class, 'updateProfile']);
+    Route::post('/profile/upload-photo', [AuthentikasiController::class, 'uploadPhoto']);
     Route::post('/login', [AuthentikasiController::class, 'login']);
     Route::get('/users', [AuthentikasiController::class, 'index']);
 });
@@ -60,6 +60,6 @@ Route::prefix('bencana')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post('/login', [PenggunaController::class, 'login']);
     });
-    
+
     Route::apiResource('pengguna', PenggunaController::class);
 });

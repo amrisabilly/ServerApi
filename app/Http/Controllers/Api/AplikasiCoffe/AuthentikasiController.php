@@ -53,7 +53,7 @@ class AuthentikasiController extends Controller
         return response()->json(User::all());
     }
 
-    public function updateProfile(Request $request)
+    public function uploadPhoto(Request $request)
     {
         $user = User::find(auth('api')->id());
 
