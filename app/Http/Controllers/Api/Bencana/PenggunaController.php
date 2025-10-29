@@ -15,8 +15,35 @@ class PenggunaController extends Controller
     public function index()
     {
         $pengguna = Pengguna::all();
-        return response()->json($pengguna);
+        return response()->json($pengguna, 200);
     }
+
+    // Login method
+    public function login(Request $request)
+    {
+        $validatedData = $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        // Cari pengguna berdasarkan username
+        $pengguna = Pengguna::where('username', $validatedData['username'])->first();
+
+        if (!$pengguna || !Hash::check($validatedData['password'], $pengguna->password)) {
+            return response()->json(['message' => 'Username atau password salah'], 401);
+        }
+
+        // Jika login berhasil, kembalikan data pengguna
+        return response()->json([
+            'id' => $pengguna->id,
+            'nama_lengkap' => $pengguna->nama_lengkap,
+            'username' => $pengguna->username,
+            'created_at' => $pengguna->created_at,
+            'updated_at' => $pengguna->updated_at,
+        ], 200);
+    }
+
+
 
     /**
      * Store a newly created resource in storage.

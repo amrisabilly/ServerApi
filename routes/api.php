@@ -57,5 +57,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Bencana Routes
 Route::prefix('bencana')->group(function () {
+    Route::prefix('auth')->group(function () {
+        Route::post('/login', [PenggunaController::class, 'login']);
+    });
+    
     Route::apiResource('pengguna', PenggunaController::class);
 });
