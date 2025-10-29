@@ -8,6 +8,7 @@ use Database\Seeders\AplikasiCoffe\CategoriesSeeder;
 use Database\Seeders\AplikasiCoffe\ProductSeeder;
 use Database\Seeders\MbahOerip\CategorySeeder;
 use Database\Seeders\MbahOerip\MenuItemSeeder;
+use Database\Seeders\Bencana\PenggunaSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +25,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             MenuItemSeeder::class,
+        ]);
+
+        // Bencana
+        $this->call([
+            PenggunaSeeder::class,
         ]);
     }
 }

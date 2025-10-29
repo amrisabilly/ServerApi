@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\PersonController;
 use App\Http\Controllers\Api\AplikasiCoffe\AuthentikasiController;
 use App\Http\Controllers\Api\AplikasiCoffe\CategoriesController;
 use App\Http\Controllers\Api\AplikasiCoffe\ProductController;
+use App\Http\Controllers\Api\Bencana\PenggunaController;
 use App\Http\Controllers\Api\MbahOerip\CategoryController;
 use App\Http\Controllers\Api\MbahOerip\HomeController;
 use App\Http\Controllers\Api\MbahOerip\MenuController;
@@ -47,4 +48,9 @@ Route::prefix('mbah-oerip')->group(function () {
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+// Bencana Routes
+Route::prefix('bencana')->group(function () {
+    Route::apiResource('pengguna', PenggunaController::class);
 });
