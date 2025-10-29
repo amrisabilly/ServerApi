@@ -58,12 +58,21 @@ class AuthentikasiController extends Controller
         $user = User::find(auth('api')->id());
 
         $request->validate([
-            'photo_url' => 'required|url|max:255',
+            'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $user->photo_url = $request->photo_url;
-        $user->save();
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $filename = 'profile_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/profile', $filename);
+            $url = asset('storage/profile/' . $filename);
 
-        return response()->json(['user' => $user]);
+            $user->photo_url = $url;
+            $user->save();
+
+            return response()->json(['photo_url' => $url, 'user' => $user]);
+        }
+
+        return response()->json(['error' => 'Upload gagal'], 400);
     }
 }
