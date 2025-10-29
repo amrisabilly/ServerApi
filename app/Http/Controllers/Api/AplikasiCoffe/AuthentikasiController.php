@@ -64,8 +64,8 @@ class AuthentikasiController extends Controller
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $filename = 'profile_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/profile', $filename);
-            $url = asset('storage/profile/' . $filename);
+            $file->storeAs('public', $filename);
+            $url = asset('storage/' . $filename);
 
             $user->photo_url = $url;
             $user->save();
