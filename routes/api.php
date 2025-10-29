@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PersonController;
 use App\Http\Controllers\Api\AplikasiCoffe\AuthentikasiController;
 use App\Http\Controllers\Api\AplikasiCoffe\CategoriesController;
+use App\Http\Controllers\Api\AplikasiCoffe\OrderController;
+use App\Http\Controllers\Api\AplikasiCoffe\OrderItemsController;
 use App\Http\Controllers\Api\AplikasiCoffe\ProductController;
 use App\Http\Controllers\Api\Bencana\PenggunaController;
 use App\Http\Controllers\Api\MbahOerip\CategoryController;
@@ -24,6 +26,8 @@ Route::prefix('auth')->group(function () {
 Route::prefix('coffe')->group(function () {
     Route::apiResource('categories', CategoriesController::class);
     Route::apiResource('products', ProductController::class);
+    Route::apiResource('orders', OrderController::class);
+    Route::apiResource('order-items', OrderItemsController::class);
 });
 
 Route::prefix('mbah-oerip')->group(function () {

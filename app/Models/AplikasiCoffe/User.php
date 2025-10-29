@@ -16,6 +16,7 @@ class User extends Authenticatable implements JWTSubject
         'auth_provider',
         'provider_id',
         'email_verified_at',
+        'photo_url',
     ];
 
     protected $hidden = [
@@ -35,5 +36,9 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+    public function orders()
+    {
+        return $this->hasMany(Orders::class, 'user_id');
     }
 }
