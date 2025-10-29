@@ -19,6 +19,7 @@ Route::resource('/person', PersonController::class);
 
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthentikasiController::class, 'register']);
+    Route::put('/profile/update', [AuthentikasiController::class, 'updateProfile']);
     Route::post('/login', [AuthentikasiController::class, 'login']);
     Route::get('/users', [AuthentikasiController::class, 'index']);
 });

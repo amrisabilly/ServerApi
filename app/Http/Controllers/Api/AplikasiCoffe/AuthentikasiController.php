@@ -52,4 +52,18 @@ class AuthentikasiController extends Controller
     {
         return response()->json(User::all());
     }
+
+    public function updateProfile(Request $request)
+    {
+        $user = User::find(auth('api')->id());
+
+        $request->validate([
+            'photo_url' => 'required|url|max:255',
+        ]);
+
+        $user->photo_url = $request->photo_url;
+        $user->save();
+
+        return response()->json(['user' => $user]);
+    }
 }
