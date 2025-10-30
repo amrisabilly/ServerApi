@@ -10,7 +10,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return response()->json(Product::with('category')->get());
+        // Tambahkan eager loading untuk ratings dan favouritedBy
+        return response()->json(Product::with(['category', 'ratings', 'favouritedBy'])->get());
     }
 
     public function store(Request $request)
@@ -24,12 +25,12 @@ class ProductController extends Controller
             'image_url' => 'nullable|string',
         ]);
         $product = Product::create($data);
-        return response()->json($product, 201);
+        return response()->json($product->load(['category', 'ratings', 'favouritedBy']), 201);
     }
 
     public function show($id)
     {
-        $product = Product::with('category')->findOrFail($id);
+        $product = Product::with(['category', 'ratings', 'favouritedBy'])->findOrFail($id);
         return response()->json($product);
     }
 
@@ -45,7 +46,7 @@ class ProductController extends Controller
             'image_url' => 'nullable|string',
         ]);
         $product->update($data);
-        return response()->json($product);
+        return response()->json($product->load(['category', 'ratings', 'favouritedBy']));
     }
 
     public function destroy($id)

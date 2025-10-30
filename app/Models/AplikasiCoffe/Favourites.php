@@ -4,23 +4,19 @@ namespace App\Models\AplikasiCoffe;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order_items extends Model
+class Favourites extends Model
 {
-    protected $table = 'table_order_items';
+    protected $table = 'favourites';
 
     protected $fillable = [
-        'order_id',
+        'user_id',
         'product_id',
-        'qty',
-        'price',
-        'temperature',
-        'size'
     ];
 
-    // Relasi ke order
-    public function order()
+    // Relasi ke user
+    public function user()
     {
-        return $this->belongsTo(Orders::class, 'order_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     // Relasi ke produk

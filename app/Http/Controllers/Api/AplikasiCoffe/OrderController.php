@@ -38,18 +38,26 @@ class OrderController extends Controller
             'items.*.product_id' => 'required|exists:product,id',
             'items.*.qty' => 'required|integer|min:1',
             'items.*.price' => 'required|numeric|min:0',
+            'payment_method' => 'nullable|string|max:100',
+            'discount' => 'nullable|numeric|min:0',
         ]);
 
-        // Hitung total
+        // Hitung total sebelum diskon
         $total = collect($request->items)->sum(function ($item) {
             return $item['qty'] * $item['price'];
         });
 
+        // Kurangi diskon jika ada
+        $discount = $request->discount ?? 0;
+        $finalTotal = $total - $discount;
+
         // Simpan order
         $order = Orders::create([
             'user_id' => $request->user_id,
-            'total' => $total,
+            'total' => $finalTotal,
             'status' => 'pending',
+            'payment_method' => $request->payment_method,
+            'discount' => $discount,
         ]);
 
         // Simpan order items
@@ -89,11 +97,11 @@ class OrderController extends Controller
     {
         $order = Orders::findOrFail($id);
         $request->validate([
-            'status' => 'required|string',
+            'status' => 'sometimes|string',
+            'payment_method' => 'sometimes|string|max:100',
+            'discount' => 'sometimes|numeric|min:0',
         ]);
-        $order->update([
-            'status' => $request->status,
-        ]);
+        $order->update($request->only(['status', 'payment_method', 'discount']));
         return response()->json($order);
     }
 

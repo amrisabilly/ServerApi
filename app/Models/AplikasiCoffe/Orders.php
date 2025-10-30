@@ -12,6 +12,8 @@ class Orders extends Model
         'user_id',
         'total',
         'status',
+        'payment_method',
+        'discount'
     ];
 
     // Relasi ke user

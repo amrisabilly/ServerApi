@@ -17,6 +17,7 @@ class User extends Authenticatable implements JWTSubject
         'provider_id',
         'email_verified_at',
         'photo_url',
+        'points'
     ];
 
     protected $hidden = [
@@ -40,5 +41,13 @@ class User extends Authenticatable implements JWTSubject
     public function orders()
     {
         return $this->hasMany(Orders::class, 'user_id');
+    }
+    public function ratings()
+    {
+        return $this->hasMany(Ratings::class, 'user_id');
+    }
+    public function favourites()
+    {
+        return $this->belongsToMany(Product::class, 'favourites', 'user_id', 'product_id');
     }
 }

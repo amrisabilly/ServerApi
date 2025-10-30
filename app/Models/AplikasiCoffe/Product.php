@@ -22,4 +22,14 @@ class Product extends Model
     {
         return $this->belongsTo(Categories::class, 'category_id');
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Ratings::class, 'product_id');
+    }
+
+    public function favouritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favourites', 'product_id', 'user_id');
+    }
 }

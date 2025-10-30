@@ -23,6 +23,8 @@ class OrderItemsController extends Controller
             'product_id' => 'required|exists:product,id',
             'qty' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
+            'temperature' => 'nullable|string|max:50',
+            'size' => 'nullable|string|max:10',
         ]);
 
         $item = Order_items::create([
@@ -30,6 +32,8 @@ class OrderItemsController extends Controller
             'product_id' => $request->product_id,
             'qty' => $request->qty,
             'price' => $request->price,
+            'temperature' => $request->temperature,
+            'size' => $request->size,
         ]);
 
         return response()->json($item, 201);
@@ -52,9 +56,11 @@ class OrderItemsController extends Controller
             'product_id' => 'sometimes|exists:product,id',
             'qty' => 'sometimes|integer|min:1',
             'price' => 'sometimes|numeric|min:0',
+            'temperature' => 'nullable|string|max:50',
+            'size' => 'nullable|string|max:10',
         ]);
 
-        $item->update($request->only(['order_id', 'product_id', 'qty', 'price']));
+        $item->update($request->only(['order_id', 'product_id', 'qty', 'price', 'temperature', 'size']));
 
         return response()->json($item);
     }

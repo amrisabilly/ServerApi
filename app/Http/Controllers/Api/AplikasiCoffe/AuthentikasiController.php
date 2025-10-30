@@ -43,14 +43,14 @@ class AuthentikasiController extends Controller
 
         return response()->json([
             'message' => 'Login berhasil',
-            'user' => $user,
+            'user' => $user->load(['orders', 'ratings', 'favourites']),
             'token' => $token,
         ]);
     }
 
     public function index()
     {
-        return response()->json(User::all());
+        return response()->json(User::with(['orders', 'ratings', 'favourites'])->get());
     }
 
     public function uploadPhoto(Request $request)
@@ -74,5 +74,46 @@ class AuthentikasiController extends Controller
         }
 
         return response()->json(['error' => 'Upload gagal'], 400);
+    }
+
+    public function addPoint(Request $request)
+    {
+        $user = User::find(auth('api')->id());
+        $request->validate([
+            'points' => 'sometimes|integer|min:1', // opsional, default 1
+        ]);
+        $add = $request->points ?? 1;
+        $user->points += $add;
+        $user->save();
+
+        return response()->json([
+            'message' => 'Poin berhasil ditambahkan',
+            'points' => $user->points,
+            'user' => $user
+        ]);
+    }
+
+    public function redeemPoints(Request $request)
+    {
+        $user = User::find(auth('api')->id());
+        $request->validate([
+            'points' => 'required|integer|min:1',
+        ]);
+        $redeem = $request->points;
+
+        if ($user->points < $redeem) {
+            return response()->json(['message' => 'Poin tidak cukup'], 400);
+        }
+
+        $user->points -= $redeem;
+        $user->save();
+
+        // Di sini Anda bisa menambahkan logika pemberian diskon, dsb.
+
+        return response()->json([
+            'message' => 'Poin berhasil ditukar',
+            'points' => $user->points,
+            'user' => $user
+        ]);
     }
 }

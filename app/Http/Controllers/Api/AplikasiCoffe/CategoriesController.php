@@ -16,8 +16,9 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|unique:table_categories,name',
-            'description' => 'nullable|string',
+            'name' => 'required',
+            'description' => 'nullable',
+            'url_foto' => 'nullable',
         ]);
         $category = Categories::create($data);
         return response()->json($category, 201);
@@ -35,6 +36,7 @@ class CategoriesController extends Controller
         $data = $request->validate([
             'name' => 'required|unique:table_categories,name,' . $id,
             'description' => 'nullable|string',
+            'url_foto' => 'nullable|string|max:255',
         ]);
         $category->update($data);
         return response()->json($category);
