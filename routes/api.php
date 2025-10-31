@@ -71,5 +71,11 @@ Route::prefix('bencana')->group(function () {
         Route::post('/login', [PenggunaController::class, 'login']);
     });
 
+    Route::prefix('pengguna')->group(function () {
+        Route::post('/login', [PenggunaController::class, 'login']);
+    });
     Route::apiResource('pengguna', PenggunaController::class);
+    Route::post('pengguna/{id}/upload-photo', [PenggunaController::class, 'uploadPhoto']);
+
+
 });
