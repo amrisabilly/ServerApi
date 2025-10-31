@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\AplikasiCoffe\ProductController;
 use App\Http\Controllers\Api\AplikasiCoffe\RatingsController;
 use App\Http\Controllers\Api\Bencana\PenggunaController;
 use App\Http\Controllers\Api\MbahOerip\CategoryController;
+use App\Http\Controllers\Api\MbahOerip\GambarController;
 use App\Http\Controllers\Api\MbahOerip\HomeController;
 use App\Http\Controllers\Api\MbahOerip\MenuController;
 
@@ -55,6 +56,9 @@ Route::prefix('mbah-oerip')->group(function () {
     // DELETE /api/mbah-oerip/menu/{id}         -> MenuController@destroy
     Route::apiResource('menu', MenuController::class);
     // Route::get('/best-sellers', [HomeController::class, 'getBestSellers']);
+    Route::get('/product/create', [GambarController::class, 'create']);
+    Route::post('/product/store', [GambarController::class, 'store']);
+    Route::get('/product/list', [GambarController::class, 'list']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
