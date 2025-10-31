@@ -14,9 +14,11 @@ Route::get('/', function () {
     return view('landing.home.index');
 })->name('index');
 
-Route::get('/about', function () {
-    return view('landing.about.index');
-})->name('about');
+
+Route::get('/about', [GambarController::class, 'list'])->name('product.list');
+// Route::get('/about', function () {
+//     return view('landing.about.index');
+// })->name('about');
 
 // Route::get('/article', function () {
 //     return view('landing.article.index');
