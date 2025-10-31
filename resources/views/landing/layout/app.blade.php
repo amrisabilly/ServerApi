@@ -8,7 +8,7 @@
 </head>
 
 <body class="overflow-x-hidden">
-    @include('landing.partials.navbar')
+    {{-- @include('landing.partials.navbar') --}}
 
     <div class="min-h-screen font-sora flex justify-center items-center">
         @yield('content')
