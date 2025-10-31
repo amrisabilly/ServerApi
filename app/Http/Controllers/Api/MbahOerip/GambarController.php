@@ -34,6 +34,6 @@ class GambarController extends Controller
     public function list()
     {
         $data = Product::all();
-        return view('about.index', compact('data'));
+        return view('landing.about.index', compact('data'));
     }
 }

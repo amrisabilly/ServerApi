@@ -10,5 +10,5 @@ class Pengguna extends Model
     use HasFactory;
 
     protected $table = 'pengguna'; // Nama tabel
-    protected $fillable = ['nama_lengkap', 'username', 'password']; // Kolom yang dapat diisi
+    protected $fillable = ['url_foto'.'nama_lengkap', 'username', 'password']; // Kolom yang dapat diisi
 }

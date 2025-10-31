@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bencana\Pengguna;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class PenggunaController extends Controller
 {
@@ -104,4 +105,44 @@ class PenggunaController extends Controller
 
         return response()->json(['message' => 'Pengguna deleted successfully']);
     }
+
+    // foto
+    public function uploadPhoto(Request $request, string $id)
+    {
+        $pengguna = Pengguna::findOrFail($id);
+
+        $request->validate([
+            'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        if ($request->hasFile('photo')) {
+            // Hapus foto lama jika ada
+            if ($pengguna->url_foto) {
+                $oldPhotoPath = str_replace(asset('storage/'), '', $pengguna->url_foto);
+                if (Storage::disk('public')->exists($oldPhotoPath)) {
+                    Storage::disk('public')->delete($oldPhotoPath);
+                }
+            }
+
+            $file = $request->file('photo');
+            $filename = 'pengguna_' . $pengguna->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+            
+            // Simpan ke storage/app/public/photos
+            $path = $file->storeAs('photos', $filename, 'public');
+            $url = asset('storage/' . $path);
+
+            // Update kolom url_foto di database
+            $pengguna->url_foto = $url;
+            $pengguna->save();
+
+            return response()->json([
+                'message' => 'Photo uploaded successfully',
+                'photo_url' => $url, 
+                'pengguna' => $pengguna
+            ], 200);
+        }
+
+        return response()->json(['error' => 'Upload gagal'], 400);
+    }
+
 }
