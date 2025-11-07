@@ -75,6 +75,17 @@ Route::prefix('bencana')->group(function () {
         Route::post('/login', [PenggunaController::class, 'login']);
     });
     Route::apiResource('pengguna', PenggunaController::class);
-     // Route upload photo
+    // Route upload photo
     Route::post('pengguna/{id}/upload-photo', [PenggunaController::class, 'uploadPhoto']);
+});
+
+Route::prefix('kriptografi')->group(function () {
+    Route::post('/register', [\App\Http\Controllers\Api\Kriptografi\AuthentikasiController::class, 'register']);
+    Route::post('/login', [\App\Http\Controllers\Api\Kriptografi\AuthentikasiController::class, 'login']);
+    Route::get('/users', [\App\Http\Controllers\Api\Kriptografi\AuthentikasiController::class, 'index']);
+    Route::get('/users/{id}', [\App\Http\Controllers\Api\Kriptografi\AuthentikasiController::class, 'show']);
+
+    Route::get('/messages', [\App\Http\Controllers\Api\Kriptografi\MessageController::class, 'index']);
+    Route::post('/messages', [\App\Http\Controllers\Api\Kriptografi\MessageController::class, 'store']);
+    Route::get('/messages/{id}', [\App\Http\Controllers\Api\Kriptografi\MessageController::class, 'show']);
 });
