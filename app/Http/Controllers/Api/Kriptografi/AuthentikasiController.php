@@ -42,13 +42,13 @@ class AuthentikasiController extends Controller
             return response()->json(['message' => 'Login gagal'], 401);
         }
 
-        // Jika pakai Sanctum/JWT, generate token di sini
-        // $token = $user->createToken('api-token')->plainTextToken;
+
+        $token = $user->createToken('api-token')->plainTextToken;
 
         return response()->json([
             'message' => 'Login berhasil',
             'user' => $user,
-            // 'token' => $token,
+            'token' => $token,
         ]);
     }
 
