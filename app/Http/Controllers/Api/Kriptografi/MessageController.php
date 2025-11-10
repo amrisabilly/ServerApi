@@ -28,11 +28,14 @@ class MessageController extends Controller
     // List pesan untuk user tertentu
     public function index(Request $request)
     {
-        $userId = $request->query('user_id');
-        $messages = MessagesKriptografi::where('recipient_id', $userId)
-            ->orWhere('sender_id', $userId)
-            ->get();
-
+        if ($request->has('user_id')) {
+            $userId = $request->query('user_id');
+            $messages = MessagesKriptografi::where('recipient_id', $userId)
+                ->orWhere('sender_id', $userId)
+                ->get();
+        } else {
+            $messages = MessagesKriptografi::all();
+        }
         return response()->json($messages);
     }
 
