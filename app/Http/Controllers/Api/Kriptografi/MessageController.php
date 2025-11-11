@@ -16,9 +16,16 @@ class MessageController extends Controller
             'recipient_id' => 'required|exists:users_kripto,id',
             'content_type' => 'required|string',
             'encrypted_payload' => 'required|string',
-            'file_name' => 'nullable|string',
-            'file_size' => 'nullable|integer',
+            'file' => 'nullable|file|mimes:jpg,jpeg,png,pdf,docx,txt|max:2048',
         ]);
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('', $filename, 'public'); // simpan di root public
+            $data['file_name'] = $filename;
+            $data['file_size'] = $file->getSize();
+        }
 
         $message = MessagesKriptografi::create($data);
 
