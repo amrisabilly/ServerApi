@@ -18,6 +18,7 @@ class AuthentikasiController extends Controller
             'email' => 'required|email|unique:users_kripto,email',
             'password' => 'required|string|min:6',
             'public_key' => 'required|string',
+            'private_key' => 'required|string', // tambahkan validasi private_key
             'profile_photo_url' => 'nullable|string',
             'bio' => 'nullable|string',
         ]);
@@ -25,7 +26,9 @@ class AuthentikasiController extends Controller
         $data['password'] = Hash::make($data['password']);
         $user = UsersKriptografi::create($data);
 
-        return response()->json(['user' => $user], 201);
+        return response()->json([
+            'user' => $user->makeVisible('private_key')
+        ], 201);
     }
 
     // Login user

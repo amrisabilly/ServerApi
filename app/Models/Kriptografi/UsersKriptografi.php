@@ -23,6 +23,7 @@ class UsersKriptografi extends Authenticatable
         'email',
         'password',
         'public_key',
+        'private_key',
         'profile_photo_url',
         'bio',
     ];
@@ -81,6 +82,15 @@ class UsersKriptografi extends Authenticatable
     }
 
     public function getBioAttribute($value)
+    {
+        return $value ? Crypt::decryptString($value) : null;
+    }
+    public function setPrivateKeyAttribute($value)
+    {
+        $this->attributes['private_key'] = Crypt::encryptString($value);
+    }
+
+    public function getPrivateKeyAttribute($value)
     {
         return $value ? Crypt::decryptString($value) : null;
     }
