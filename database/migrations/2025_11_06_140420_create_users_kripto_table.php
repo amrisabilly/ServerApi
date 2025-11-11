@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('password');
             $table->text('public_key');
+            $table->text('private_key');
             $table->string('profile_photo_url')->nullable();
             $table->text('bio')->nullable();
             $table->rememberToken();
