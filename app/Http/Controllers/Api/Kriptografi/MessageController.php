@@ -17,6 +17,8 @@ class MessageController extends Controller
             'content_type' => 'required|string',
             'encrypted_payload' => 'required|string',
             'file' => 'nullable|file|mimes:jpg,jpeg,png,pdf,docx,txt|max:2048',
+            'file_name' => 'nullable|string',
+            'file_size' => 'nullable|integer',
         ]);
 
         if ($request->hasFile('file')) {
