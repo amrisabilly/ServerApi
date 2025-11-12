@@ -11,13 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_orders', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('table_user')->onDelete('cascade');
-            $table->decimal('total', 15, 2)->default(0);
-            $table->string('status')->default('pending');
-            $table->timestamps();
-        });
+       
     }
 
     /**

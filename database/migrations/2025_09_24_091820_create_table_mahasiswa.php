@@ -11,12 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_mahasiswa', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->integer('nim');
-            $table->timestamps();
-        });
+        
     }
 
     /**

@@ -11,15 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('article_id')        // relasi ke artikel
-                  ->constrained()
-                  ->onDelete('cascade');          // jika artikel dihapus, komentar ikut hilang
-            $table->string('name');                // nama pengirim komentar
-            $table->text('comment');               // isi komentar
-            $table->timestamps();                  // created_at & updated_at
-        });
+       
     }
 
     /**

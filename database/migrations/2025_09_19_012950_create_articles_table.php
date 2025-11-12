@@ -11,13 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');              // judul artikel
-            $table->text('content');              // isi artikel
-            $table->string('author')->nullable(); // nama penulis (opsional)
-            $table->timestamps();                 // created_at & updated_at
-        });
+       
     }
 
     /**

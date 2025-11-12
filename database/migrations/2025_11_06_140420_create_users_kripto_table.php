@@ -11,19 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users_kripto', function (Blueprint $table) {
-            $table->id();
-            $table->string('username')->unique();
-            $table->string('display_name');
-            $table->string('email');
-            $table->string('password');
-            $table->text('public_key');
-            $table->text('private_key');
-            $table->string('profile_photo_url')->nullable();
-            $table->text('bio')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
-        });
+        
     }
 
     /**
