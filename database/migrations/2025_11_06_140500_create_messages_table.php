@@ -11,7 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
+        Schema::create('messages', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('sender_id')
+                ->constrained('users_kripto')
+                ->onDelete('cascade');
+            $table->foreignId('recipient_id')
+                ->constrained('users_kripto')
+                ->onDelete('cascade');
+            $table->enum('content_type', ['text', 'file', 'steganography']);
+            $table->binary('encrypted_payload');
+            $table->string('file_name')->nullable();
+            $table->string('file_size')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**

@@ -11,7 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-    
+        Schema::table('table_user', function (Blueprint $table) {
+            $table->integer('points')->default(0)->after('photo_url');
+        });
     }
 
     /**

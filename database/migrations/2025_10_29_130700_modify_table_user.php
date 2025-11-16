@@ -11,7 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
+        Schema::table('table_user', function (Blueprint $table) {
+            $table->string('photo_url')->nullable()->after('email_verified_at');
+        });
     }
 
     /**

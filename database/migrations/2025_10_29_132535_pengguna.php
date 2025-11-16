@@ -11,7 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
+        Schema::create('pengguna', function (Blueprint $table) {
+            $table->id(); // Primary key auto-increment
+            $table->string('nama_lengkap'); // Nama lengkap pengguna
+            $table->string('username')->unique(); // Username unik
+            $table->string('password'); // Password pengguna
+            $table->timestamps(); // Kolom created_at dan updated_at
+        });
     }
 
     /**

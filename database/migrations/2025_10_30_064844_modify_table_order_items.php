@@ -11,7 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
+        Schema::table('table_order_items', function (Blueprint $table) {
+            $table->string('temperature')->nullable()->after('price');
+            $table->string('size')->nullable()->after('temperature');
+        });
     }
 
     /**

@@ -11,7 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-       
+        Schema::create('favourites', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('table_user')->onDelete('cascade');
+            $table->foreignId('product_id')->constrained('product')->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
