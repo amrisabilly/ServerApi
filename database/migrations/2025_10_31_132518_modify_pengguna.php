@@ -9,12 +9,6 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::table('pengguna', function (Blueprint $table) {
-            $table->string('url_foto')->nullable()->after('id');
-        });
-    }
 
     /**
      * Reverse the migrations.

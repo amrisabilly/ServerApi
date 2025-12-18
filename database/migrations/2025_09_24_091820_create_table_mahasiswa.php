@@ -9,15 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('table_mahasiswa', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->integer('nim');
-            $table->timestamps();
-        });
-    }
+    
 
     /**
      * Reverse the migrations.

@@ -9,13 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
-    {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->unsignedBigInteger('parent_id')->nullable()->after('id');
-            $table->foreign('parent_id')->references('id')->on('comments')->onDelete('cascade');
-        });
-    }
+    
 
     public function down()
     {

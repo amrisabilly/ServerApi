@@ -9,21 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('menu_items', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->integer('price');
-            $table->string('image_url');
-
-            // Ini adalah kunci relasi ke tabel 'categories'
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
-
-            $table->timestamps();
-        });
-    }
+    
 
     /**
      * Reverse the migrations.

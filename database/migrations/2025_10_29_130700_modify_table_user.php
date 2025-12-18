@@ -9,12 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::table('table_user', function (Blueprint $table) {
-            $table->string('photo_url')->nullable()->after('email_verified_at');
-        });
-    }
+    
 
     /**
      * Reverse the migrations.

@@ -9,13 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::table('table_orders', function (Blueprint $table) {
-            $table->string('payment_method')->nullable()->after('status');
-            $table->integer('discount')->default(0); 
-        });
-    }
+    
 
     /**
      * Reverse the migrations.
